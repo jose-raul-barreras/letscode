@@ -1,0 +1,36 @@
+https://www.hackerrank.com/challenges/ctci-making-anagrams
+
+def str_to_dict(s):
+    # convert string to dictionary
+    res = dict()
+    for e in s:
+        if e in res:
+            res[e] += 1
+        else:
+            res[e] = 1
+    return res     
+
+def changes_needed(d1, d2):
+    # receive two dictionaries with characters as keys and integers as values
+    # return the sum of the difference between the values of elements with the same key
+    res = 0
+    keys = set(list(d1.keys()) + list(d2.keys()))
+    for k in keys:
+        if k in d1.keys():
+            if k in d2.keys():
+                res += abs(d1[k]-d2[k])
+            else:
+                res += d1[k]
+        else:
+            res += d2[k]
+    return res
+
+def number_needed(a, b):
+    d1 = str_to_dict(a)
+    d2 = str_to_dict(b)
+    return changes_needed(d1, d2)
+    
+a = input().strip()
+b = input().strip()
+
+print(number_needed(a, b))
